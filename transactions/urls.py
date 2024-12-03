@@ -1,7 +1,7 @@
 from django.urls import path
-from . import views
+from .views import TransactionListCreateView, TransactionDetailView
 
 urlpatterns = [
-    # Placeholder for endpoints
-    # Example: path('list/', views.ComponentListView.as_view(), name='component-list'),
+    path('', TransactionListCreateView.as_view(), name='transaction-list-create'),
+    path('<int:pk>/', TransactionDetailView.as_view(), name='transaction-detail'),
 ]

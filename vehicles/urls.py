@@ -1,7 +1,7 @@
 from django.urls import path
-from . import views
+from .views import VehicleListCreateView, VehicleDetailView
 
 urlpatterns = [
-    # Placeholder for endpoints
-    # Example: path('list/', views.ComponentListView.as_view(), name='component-list'),
+    path('', VehicleListCreateView.as_view(), name='vehicle-list-create'),
+    path('<int:pk>/', VehicleDetailView.as_view(), name='vehicle-detail'),
 ]

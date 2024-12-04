@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getComponents, addComponent, updateComponent, deleteComponent } from '../api/components';
+import './ComponentsPage.css';
 
 const ComponentsPage = () => {
     const [components, setComponents] = useState([]);

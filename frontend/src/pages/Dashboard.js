@@ -19,24 +19,30 @@ const Dashboard = () => {
 
     const processRevenueData = (transactions) => {
         // Process transactions to calculate daily, monthly, and yearly revenue
-        // This function should return formatted data for the BarChart
         const revenues = transactions.reduce((acc, transaction) => {
             const date = new Date(transaction.date);
             const year = date.getFullYear();
             const month = `${year}-${(date.getMonth() + 1).toString().padStart(2, '0')}`;
             const day = `${month}-${date.getDate().toString().padStart(2, '0')}`;
 
-            acc.yearly[year] = (acc.yearly[year] || 0) + transaction.total_price;
-            acc.monthly[month] = (acc.monthly[month] || 0) + transaction.total_price;
-            acc.daily[day] = (acc.daily[day] || 0) + transaction.total_price;
+            // Aggregate total_price for each day, month, and year
+            acc.daily[day] = (acc.daily[day] || 0) + parseFloat(transaction.total_price);
+            acc.monthly[month] = (acc.monthly[month] || 0) + parseFloat(transaction.total_price);
+            acc.yearly[year] = (acc.yearly[year] || 0) + parseFloat(transaction.total_price);
 
             return acc;
         }, { daily: {}, monthly: {}, yearly: {} });
 
+        // Convert daily, monthly, and yearly revenues into an array of objects
+        const dailyData = Object.entries(revenues.daily).map(([day, revenue]) => ({ label: day, revenue }));
+        const monthlyData = Object.entries(revenues.monthly).map(([month, revenue]) => ({ label: month, revenue }));
+        const yearlyData = Object.entries(revenues.yearly).map(([year, revenue]) => ({ label: year, revenue }));
+
+        // Return combined data for the chart
         return [
-            { label: 'Daily', revenue: Object.values(revenues.daily).reduce((sum, val) => sum + val, 0) },
-            { label: 'Monthly', revenue: Object.values(revenues.monthly).reduce((sum, val) => sum + val, 0) },
-            { label: 'Yearly', revenue: Object.values(revenues.yearly).reduce((sum, val) => sum + val, 0) },
+            { label: 'Daily', revenueData: dailyData },
+            { label: 'Monthly', revenueData: monthlyData },
+            { label: 'Yearly', revenueData: yearlyData },
         ];
     };
 
@@ -46,7 +52,7 @@ const Dashboard = () => {
             <BarChart
                 width={600}
                 height={400}
-                data={data}
+                data={data[0]?.revenueData || []}  // Show Daily Data as default
                 margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
             >
                 <CartesianGrid strokeDasharray="3 3" />
@@ -56,6 +62,8 @@ const Dashboard = () => {
                 <Legend />
                 <Bar dataKey="revenue" fill="#8884d8" />
             </BarChart>
+
+            {/* You can add dropdowns or buttons to switch between Daily, Monthly, and Yearly data */}
         </div>
     );
 };

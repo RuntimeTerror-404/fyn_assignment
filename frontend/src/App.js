@@ -1,4 +1,5 @@
 import React from 'react';
+import './App.css'; 
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import Dashboard from './pages/Dashboard';
 import ComponentsPage from './pages/ComponentsPage';
@@ -18,10 +19,10 @@ function App() {
             </nav>
             <Routes>
                 <Route path="/" element={<Dashboard />} />
-                <Route path="/transactions" element={<TransactionsPage />} />
                 <Route path="/components" element={<ComponentsPage />} />
                 <Route path="/vehicles" element={<VehiclesPage />} />
                 <Route path="/issues" element={<IssuesPage />} />
+                <Route path="/transactions" element={<TransactionsPage />} />
             </Routes>
         </Router>
     );

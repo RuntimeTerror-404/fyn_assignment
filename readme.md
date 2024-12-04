@@ -13,19 +13,19 @@ A full-stack web application for managing vehicle service systems. This project 
 ## Screenshots
 
 ### Dashboard
-![Dashboard](screenshot1.png)
+![Dashboard](dashboard.png)
 
 ### Component Management
-![Components](screenshot2.png)
+![Components](component.png)
 
 ### Vehicle Management
-![Vehicles](screenshot3.png)
+![Vehicles](vehicle.png)
 
 ### Issue Management
-![Issues](screenshot4.png)
+![Issues](transaction.png)
 
 ### Transaction Management
-![Transactions](screenshot5.png)
+![Transactions](issue.png)
 
 ---
 

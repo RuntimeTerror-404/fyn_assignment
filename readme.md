@@ -55,5 +55,6 @@ Ensure you have the following installed on your system:
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/your-username/delivery-management-system.git
+git clone https://github.com/RuntimeTerror-404/fyn_assignment.git
 cd delivery-management-system
+cd frontend
